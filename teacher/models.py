@@ -1,3 +1,5 @@
 from django.db import models
+from user.models import User
 
-# Create your models here.
+class Teacher(models.Model):
+    user = models.OneToOneField('user.User', on_delete=models.CASCADE)

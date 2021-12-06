@@ -1,0 +1,10 @@
+This is the landing page
+
+<div>
+    {% if request.user.is_authenticated %}
+    User : {{request.user.username}}
+  {% endif %}
+</div>
+<div>
+    <a href="{%url 'login'%}">Login?</a>
+</div>

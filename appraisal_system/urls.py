@@ -16,6 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.contrib.auth.views import LoginView
+from user.views import landing_page_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('', landing_page_view, name = 'landing-page'),
+    path('login/', LoginView.as_view(), name = 'login'),
+    
 ]
