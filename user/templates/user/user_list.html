@@ -1,0 +1,13 @@
+<div>
+    {% for user in users %}
+        <div>
+                {{user.username}}
+                {% if user.is_teacher %}
+                  : Teacher
+                {% endif %}
+                {% if user.is_student %}
+                  : Student
+                {% endif %}
+        </div>
+    {% endfor %}
+</div>
