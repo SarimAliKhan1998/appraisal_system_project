@@ -1,10 +1,41 @@
 This is the landing page
 
+{% if request.user.is_authenticated %}
 <div>
-    {% if request.user.is_authenticated %}
     User : {{request.user.username}}
+  <div>
+    <a href="{% url 'logout' %}">Logout</a>
+  </div>
+
+
+  <div>
+    <h3>
+      Tables in Database
+    </h3>
+    <ul>
+      <li>
+        <a href="#">Users</a>
+      </li>
+      <li>
+        <a href="#">Departments</a>
+      </li>
+      <li>
+        <a href="#">Courses</a>
+      </li>
+      <li>
+        <a href="#">___</a>
+      </li>
+      <li>
+        <a href="#">___</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+  {% else %}
+  <div>
+      <a href="{%url 'login'%}">Login?</a>
+  </div>
+
   {% endif %}
-</div>
-<div>
-    <a href="{%url 'login'%}">Login?</a>
-</div>
+
