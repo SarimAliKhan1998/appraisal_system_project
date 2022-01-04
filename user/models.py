@@ -24,6 +24,9 @@ class Role(models.Model):
 class User(AbstractUser):
     pass
     # role = models.ManyToManyField(Role)
+    phone_no = models.CharField(max_length=15, null=True, blank=True)
+    address = models.CharField(max_length=100, null = True, blank= True)
+    year_of_joining = models.IntegerField(null=True, blank=True)
     is_admin = models.BooleanField(default=True)
     is_teacher = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
