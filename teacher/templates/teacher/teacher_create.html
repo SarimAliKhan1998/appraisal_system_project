@@ -1,0 +1,10 @@
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Create Teacher Record</button>
+    </form>
+    <div>
+        <a href="{% url 'landing-page' %}">Go Back</a>
+    </div>
+</div>
