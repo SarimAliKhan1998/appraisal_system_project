@@ -1,0 +1,18 @@
+<div>
+    {% for student in students %}
+        <div>Hello
+
+            {{student.user.username}}
+            {{student.user.is_student}}
+            {{student.user.is_teacher}}
+            {{student.user.username}}
+            {{student.department}}
+            {{student.user.username}}
+
+        </div>
+    {% endfor %}
+</div>
+
+<div>
+    <a href="{% url 'landing-page' %}">Go Back</a>
+</div>

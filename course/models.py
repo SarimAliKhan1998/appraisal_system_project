@@ -31,7 +31,7 @@ class Attendance(models.Model):
     # course are selected for the attendance  
 
 
-    # also, add semester and section fields to student model
+    # also, add semester and section fields to student model if needed
 
 
 class Ratings(models.Model):

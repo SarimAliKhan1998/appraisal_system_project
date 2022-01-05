@@ -32,4 +32,4 @@ class User(AbstractUser):
     is_student = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.username + f"\tAdmin : {self.is_admin} \tTeacher : {self.is_teacher} \tStudent : {self.is_student}"
+        return self.username

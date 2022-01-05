@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('user.urls', namespace='users')),
     path('courses/', include('course.urls', namespace='courses')),
+    path('students/', include('student.urls', namespace='students')),
 
     path('', landing_page_view, name = 'landing-page'),
     path('login/', LoginView.as_view(), name = 'login'),
