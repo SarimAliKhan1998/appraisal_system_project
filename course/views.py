@@ -1,7 +1,7 @@
 from django.shortcuts import render, reverse
 from .models import Course
 from .forms import CourseModelForm
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 class CourseListView(ListView):
     template_name = 'course/course_list.html'
@@ -43,3 +43,13 @@ class CourseClassCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('landing-page')
+
+
+class CourseClassDetailView(DetailView):
+
+    template_name = 'course_class/course_class_detail.html'
+    context_object_name = 'class'
+
+    def get_queryset(self):
+        queryset = CourseClass.objects.all().order_by('course__department')
+        return queryset

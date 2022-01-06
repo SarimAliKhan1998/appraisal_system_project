@@ -1,0 +1,21 @@
+<div>
+    <h3>
+        {{class}}
+    </h3>
+
+    <div>
+        <h4>Teacher :  <a href="{% url 'teachers:teacher-detail-view' class.teacher.pk %}">{{class.teacher}}</a></h4>
+    </div>
+    <h4>
+        Students
+    </h4>
+    {% for student in class.students.all %}
+      <div>
+        <a href="{% url 'students:student-detail-view' student.pk %}">{{student}}</a>
+      </div>
+    {% endfor %}
+</div>
+
+<div>
+    Click <a href="{% url 'courses:course-class-list-view' %}">here</a> to go back
+</div>
