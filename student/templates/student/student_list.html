@@ -2,7 +2,7 @@
     {% for student in students %}
         <div>
 
-            {{student.user.username}}
+            <a href="{% url 'students:student-detail-view' student.pk %}">{{student.user.username}}</a>
             {{student.user.is_student}}
             {{student.user.is_teacher}}
             {{student.department}}

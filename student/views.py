@@ -49,3 +49,25 @@ class StudentCreateView(CreateView):
         )
 
         return super(StudentCreateView, self).form_valid(form)
+
+
+
+from course.models import CourseClass
+
+class StudentDetailView(DetailView):
+
+    template_name = 'student/student_detail.html'
+    context_object_name = 'student'
+
+    def get_queryset(self):
+        queryset = Student.objects.all()
+        return queryset
+
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(StudentDetailView, self).get_context_data(*args, **kwargs)
+
+        student_classes = CourseClass.objects.filter(students__id = self.object.id).order_by('course')
+        context['classes'] = student_classes
+
+        return context

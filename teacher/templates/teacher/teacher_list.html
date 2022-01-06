@@ -2,7 +2,7 @@
     {% for teacher in teachers %}
         <div>
 
-            {{teacher.user.username}}
+            <a href="{% url 'teachers:teacher-detail-view' teacher.pk %}">{{teacher.user.username}}</a>
             {{teacher.user.is_student}}
             {{teacher.user.is_teacher}}
             {{teacher.department}}

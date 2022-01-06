@@ -45,3 +45,24 @@ class TeacherCreateView(CreateView):
         )
 
         return super(TeacherCreateView, self).form_valid(form)
+
+
+from course.models import CourseClass
+
+class TeacherDetailView(DetailView):
+
+    template_name = 'teacher/teacher_detail.html'
+    context_object_name = 'teacher'
+
+    def get_queryset(self):
+        queryset = Teacher.objects.all()
+        return queryset
+
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(TeacherDetailView, self).get_context_data(*args, **kwargs)
+
+        teacher_classes = CourseClass.objects.filter(teacher__id = self.object.id).order_by('course')
+        context['classes'] = teacher_classes
+
+        return context
