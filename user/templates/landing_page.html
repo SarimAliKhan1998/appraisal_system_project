@@ -14,16 +14,16 @@ This is the landing page
     </h3>
     <ul>
       <li>
-        <a href="#">Users</a>
+        <a href="{% url 'teachers:teacher-list-view' %}">Teachers</a>
       </li>
       <li>
-        <a href="#">Departments</a>
+        <a href="{% url 'students:student-list-view' %}">Students</a>
       </li>
       <li>
-        <a href="#">Courses</a>
+        <a href="{% url 'departments:department-list-view' %}">Departments</a>
       </li>
       <li>
-        <a href="#">___</a>
+        <a href="{% url 'courses:course-list-view' %}">Courses</a>
       </li>
       <li>
         <a href="#">___</a>

@@ -9,4 +9,4 @@ class Student(models.Model):
     department = models.ForeignKey('department.Department', null=True, blank= True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.user + " " + self.department
+        return f"{self.user} - {self.department}"

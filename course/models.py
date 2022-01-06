@@ -7,19 +7,18 @@ class Course(models.Model):
     for_semester = models.IntegerField(blank= True, null= True)
 
     def __str__(self):
-        return self.name + f" - {self.department.department_name} Department"
-
+        return  f"{self.course_name} - {self.department.department_name} Department"
 
 
 class CourseClass(models.Model):
 
     course = models.ForeignKey('course.Course', blank= True, null= True, on_delete= models.SET_NULL)
-    teacher = models.ManyToManyField('teacher.Teacher', blank= True, null= True)
+    teacher = models.ForeignKey('teacher.Teacher', blank= True, null= True, on_delete=models.SET_NULL)
     section = models.CharField(max_length=1, blank=True, null= True)
     students = models.ManyToManyField('student.Student', blank= True, null= True)
 
     def __str__(self):
-        return self.course + f" - Section {self.section} - {self.teacher}"
+        return f"{self.course} - Section {self.section} - {self.teacher}"
 
 
 class Attendance(models.Model):

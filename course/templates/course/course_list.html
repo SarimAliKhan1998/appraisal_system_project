@@ -1,7 +1,15 @@
 <div>
+    Click <a href="{% url 'courses:course-create-view' %}">here</a> to create a new course entry
+</div>
+
+<div>
     {% for course in courses %}
         <div>
                 {{course.course_name}} : {{course.department.department_name}} Department
         </div>
     {% endfor %}
+</div>
+
+<div>
+    <a href="{% url 'landing-page' %}">Go Back</a>
 </div>
