@@ -1,7 +1,8 @@
 from django.shortcuts import render, reverse
+from django.views.generic.edit import DeleteView
 from .models import Department
 from .forms import DepartmentModelForm
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 class DepartmentListView(ListView):
     template_name = 'department/department_list.html'
@@ -43,3 +44,17 @@ class DepartmentDetailView(DetailView):
         context['courses'] = courses
 
         return context
+
+
+
+class DepartmentUpdateView(UpdateView):
+
+    template_name = "department/department_update.html"
+    form_class = DepartmentModelForm
+
+    def get_queryset(self):
+        queryset = Department.objects.all()
+        return queryset
+
+    def get_success_url(self):
+        return reverse('departments:department-detail-view', args = (self.object.id,))

@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from .models import Student
 from .forms import StudentModelForm
 import random
@@ -71,3 +71,17 @@ class StudentDetailView(DetailView):
         context['classes'] = student_classes
 
         return context
+
+
+
+class StudentUpdateView(UpdateView):
+
+    template_name = "students/student_update.html"
+    form_class = StudentModelForm
+
+    def get_queryset(self):
+        queryset = Student.objects.all()
+        return queryset
+
+    def get_success_url(self):
+        return reverse('students:student-detail-view', args = (self.object.id,))

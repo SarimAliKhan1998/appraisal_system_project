@@ -2,10 +2,15 @@
     <h3>
         {{teacher.user.username}} : {{teacher.deptt}}
     </h3>
+    
+    {% for class in classes %}
+    <div>
+        {{class.course}}
+    </div>
+    {% endfor %}
+</div>
 
-{% for class in classes %}
-  <div>
-      {{class.course}}
-  </div>
-{% endfor %}
+
+<div>
+    Click <a href="{% url 'teachers:teacher-update-view' teacher.pk %}">here</a> to update teacher details
 </div>

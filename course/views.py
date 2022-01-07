@@ -1,7 +1,8 @@
 from django.shortcuts import render, reverse
+from django.views.generic.edit import DeleteView
 from .models import Course
 from .forms import CourseModelForm
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 class CourseListView(ListView):
     template_name = 'course/course_list.html'
@@ -42,6 +43,19 @@ class CourseDetailView(DetailView):
 
 
 
+class CourseUpdateView(UpdateView):
+
+    template_name = "course/course_update.html"
+    form_class = CourseModelForm
+
+    def get_queryset(self):
+        queryset = Course.objects.all()
+        return queryset
+
+    def get_success_url(self):
+        return reverse('course:course-detail-view', args = (self.object.id,))
+
+
 from .models import CourseClass
 from .forms import CourseClassModelForm
 
@@ -74,3 +88,17 @@ class CourseClassDetailView(DetailView):
     def get_queryset(self):
         queryset = CourseClass.objects.all().order_by('course__department')
         return queryset
+
+
+
+class CourseClassUpdateView(UpdateView):
+
+    template_name = "course_class/course_class_update.html"
+    form_class = CourseClassModelForm
+
+    def get_queryset(self):
+        queryset = CourseClass.objects.all()
+        return queryset
+
+    def get_success_url(self):
+        return reverse('course:course-class-detail-view', args = (self.object.id,))

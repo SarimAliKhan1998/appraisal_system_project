@@ -1,0 +1,10 @@
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Update Course Record</button>
+    </form>
+    <div>
+        <a href="{% url 'courses:course-detail-view' object.id %}">Go Back</a>
+    </div>
+</div>
