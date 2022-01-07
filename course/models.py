@@ -14,11 +14,13 @@ class CourseClass(models.Model):
 
     course = models.ForeignKey('course.Course', blank= True, null= True, on_delete= models.SET_NULL)
     teacher = models.ForeignKey('teacher.Teacher', blank= True, null= True, on_delete=models.SET_NULL)
-    section = models.CharField(max_length=1, blank=True, null= True)
+    # section = models.CharField(max_length=1, blank=True, null= True)
+    batch_name = models.CharField(max_length=20, blank=True, null= True)             # something like 'into to ds - 7th sem -section a'
     students = models.ManyToManyField('student.Student', blank= True, null= True)
 
     def __str__(self):
-        return f"{self.course} - Section {self.section} - {self.teacher}"
+        return f"{self.batch_name}"
+        # return f"{self.course} - Section {self.section} - {self.teacher}"
 
 
 class Attendance(models.Model):
