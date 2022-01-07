@@ -1,0 +1,12 @@
+<div>
+    <h3>
+        {{course.course_name}}
+    </h3>
+    Department : {{course.department}}
+    
+    {% for class in classes %}
+      <div>
+          {{class.teacher}}
+      </div>
+    {% endfor %}
+</div>

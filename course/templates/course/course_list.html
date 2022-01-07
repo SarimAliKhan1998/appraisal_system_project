@@ -5,7 +5,7 @@
 <div>
     {% for course in courses %}
         <div>
-                {{course.course_name}} : {{course.department.department_name}} Department
+                <a href="{% url 'courses:course-detail-view' course.pk %}">{{course.course_name}}</a> : {{course.department.department_name}} Department
         </div>
     {% endfor %}
 </div>

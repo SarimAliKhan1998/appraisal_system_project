@@ -20,6 +20,27 @@ class CourseCreateView(CreateView):
         return reverse('courses:course-list-view')
 
 
+from teacher.models import Teacher 
+
+class CourseDetailView(DetailView):
+
+    template_name = 'course/course_detail.html'
+    context_object_name = 'course'
+
+    def get_queryset(self):
+        queryset = Course.objects.all()
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CourseDetailView, self).get_context_data(*args, **kwargs)
+
+        # we get all the classes that are held for this particular course, from there we can extract all the teachers that are taking this course
+        classes = CourseClass.objects.filter(course__id = self.object.id)
+        context['classes'] = classes
+
+        return context
+
+
 
 from .models import CourseClass
 from .forms import CourseClassModelForm

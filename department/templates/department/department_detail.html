@@ -1,0 +1,28 @@
+<div>
+    <h3>
+        {{department}} Department
+    </h3>
+
+    <div>
+        <h4>
+            Teachers
+        </h4>
+        {% for teacher in teachers %}
+          <div>
+              {{teacher}}
+          </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <h4>
+            Courses
+        </h4>
+        {% for course in courses %}
+          <div>
+            {{course}}
+          </div>
+        {% endfor %}
+    </div>
+
+</div>
