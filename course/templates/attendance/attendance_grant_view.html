@@ -24,18 +24,38 @@
         {{class.batch_name}}
     </div>
 
+
+    
     <div>
         <div>
             Date : {{form.date}}
         </div>
         <div>
-            Total Attendance : {{form.total_attendance}}
+            Total Attendance for the day : {{form.total_attendance}}
         </div>
         {% for student in class.students.all %}
-          <div id="{{student.id}}">
+        <br>
+        <br>
+        <br>
+          <div id="{{student.id}}" class="students">
               {{student}} : {{form.attendance_granted}}
+              {% for stu in student_dict  %}
+                {% if stu.id == student.id %}
+                  <div>
+                    Attendance so far :{{stu.attendance}}/{{total_attendance}}
+                  </div>
+                  <div>
+                      Attendance percentage : {{stu.attendance_percentage}}
+                  </div>
+                {% endif %}
+              {% endfor %}
           </div>
         {% endfor %}
+        <div>
+            <button>
+                Submit Attendance
+            </button>
+        </div>
     </div>
 
 </div>

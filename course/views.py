@@ -133,6 +133,7 @@ def attendance_see_view(request, pk):
 
 
 from .forms import AttendanceGrantForm
+import datetime
 
 def attendance_grant_view(request, pk):
 
@@ -142,8 +143,29 @@ def attendance_grant_view(request, pk):
 
     context['class'] = course_class
 
-    context['form'] = AttendanceGrantForm
 
 
+    students = course_class.students.all().values()
+    # print(students)
+
+    total_attendance = 0
+    for student in students:
+        attendance = Attendance.objects.filter(student = student['id']).filter(subject = pk)
+        # if not total_attendance:
+        #     total_attendance = 
+        student_attendance = 0
+        for entry in attendance:
+            # see if there's some way, we don't have to calculate total attendance for every student coz it would be same
+            total_attendance += entry.no_of_attendances_possible
+            student_attendance += entry.no_of_attendances_granted
+
+        student['attendance'] = student_attendance
+        student['attendance_percentage'] = round((student_attendance/total_attendance)*100, 2)
+
+    context['total_attendance'] = total_attendance
+
+    context['student_dict'] = students
+
+    context['form'] = AttendanceGrantForm(initial = {'date' : datetime.date.today()})
 
     return render(request, 'attendance/attendance_grant_view.html', context)
