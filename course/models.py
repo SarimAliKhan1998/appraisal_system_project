@@ -2,6 +2,7 @@ from django.db import models
 
 class Course(models.Model):
 
+    course_code = models.CharField(max_length=12, blank = True, null = True)
     course_name = models.CharField(max_length=70)
     department = models.ForeignKey('department.Department', on_delete = models.CASCADE)
     for_semester = models.IntegerField(blank= True, null= True)

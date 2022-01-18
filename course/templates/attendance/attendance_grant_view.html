@@ -1,7 +1,29 @@
 <div>
     <div>
-        {{class}}
+        <!-- {{class}} -->
     </div>
+    <div>
+        {{class.course}}
+    </div>
+    <div>
+        {{class.course.course_code}}
+    </div>
+    <div>
+        {{class.course.course_name}}
+    </div>
+    <div>
+        {{class.course.department}}
+    </div>
+    <div>
+        {{class.course.for_semester}}
+    </div>
+    <div>
+        {{class.teacher}}
+    </div>
+    <div>
+        {{class.batch_name}}
+    </div>
+
     <div>
         <div>
             Date : {{form.date}}
@@ -10,7 +32,7 @@
             Total Attendance : {{form.total_attendance}}
         </div>
         {% for student in class.students.all %}
-          <div>
+          <div id="{{student.id}}">
               {{student}} : {{form.attendance_granted}}
           </div>
         {% endfor %}
