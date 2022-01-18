@@ -102,3 +102,48 @@ class CourseClassUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('course:course-class-detail-view', args = (self.object.id,))
+
+
+
+from .models import Attendance
+from django.db.models import Sum
+
+def attendance_see_view(request, pk):
+
+    context = {}
+    print(pk)
+    course_class = CourseClass.objects.get(id = pk)
+    # course = Course.objects.get(id = pk)
+    # print(course_class.course)
+    # print(course_class.students.all())
+
+    context['class'] = course_class
+
+    attendance_records = Attendance.objects.filter(subject = pk)
+    print(attendance_records)
+
+    total_attendance = Attendance.objects.aggregate(Sum('no_of_attendances_possible'))
+    print(total_attendance)
+
+
+    # print(course)
+
+    return render (request,'attendance/attendance_see_view.html',context)
+
+
+
+from .forms import AttendanceGrantForm
+
+def attendance_grant_view(request, pk):
+
+    context = {}
+
+    course_class = CourseClass.objects.get(id = pk)
+
+    context['class'] = course_class
+
+    context['form'] = AttendanceGrantForm
+
+
+
+    return render(request, 'attendance/attendance_grant_view.html', context)

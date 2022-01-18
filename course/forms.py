@@ -26,3 +26,20 @@ class CourseClassModelForm(forms.ModelForm):
 
         self.fields['students'].widget = CheckboxSelectMultiple()
         self.fields['students'].queryset = Student.objects.all()      # just adding this for now, so that we can manipulate later if needed
+
+
+
+import datetime
+
+class AttendanceGrantForm(forms.Form):
+
+    date = forms.DateField()
+    total_attendance = forms.IntegerField()
+    attendance_granted = forms.IntegerField()
+
+
+    def __init__(self, *args, **kwargs):
+        super(AttendanceGrantForm, self).__init__(*args, **kwargs)
+
+        today = datetime.date.today()
+        self.fields['date'].initial = today 

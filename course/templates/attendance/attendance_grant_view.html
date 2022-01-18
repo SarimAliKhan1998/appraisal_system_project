@@ -1,0 +1,23 @@
+<div>
+    <div>
+        {{class}}
+    </div>
+    <div>
+        <div>
+            Date : {{form.date}}
+        </div>
+        <div>
+            Total Attendance : {{form.total_attendance}}
+        </div>
+        {% for student in class.students.all %}
+          <div>
+              {{student}} : {{form.attendance_granted}}
+          </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+<!-- add unique ids for each student and then capture the attendance given to each of them and see how we can send attendances 
+to the backend or at least ajax it to the backend -->

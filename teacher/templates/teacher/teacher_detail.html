@@ -5,7 +5,7 @@
     
     {% for class in classes %}
     <div>
-        {{class.course}}
+        <a href="{% url 'courses:attendance-see-view' class.id %}">{{class.course}}</a>
     </div>
     {% endfor %}
 </div>

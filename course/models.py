@@ -19,6 +19,7 @@ class CourseClass(models.Model):
     students = models.ManyToManyField('student.Student', blank= True, null= True)
 
     def __str__(self):
+        return f"{self.course} - {self.teacher}"
         return f"{self.batch_name}"
         # return f"{self.course} - Section {self.section} - {self.teacher}"
 
@@ -27,7 +28,9 @@ class Attendance(models.Model):
 
     date = models.DateTimeField()
     subject = models.OneToOneField('course.CourseClass', blank= True, null= True, on_delete= models.SET_NULL)
-    student = models.OneToOneField('student.Student', blank= True, null= True, on_delete= models.SET_NULL)  
+    student = models.OneToOneField('student.Student', blank= True, null= True, on_delete= models.SET_NULL) 
+    no_of_attendances_possible = models.IntegerField(blank=True, null=True, default=1) 
+    no_of_attendances_granted = models.IntegerField(blank=True, null=True, default=1) 
     # when creating the view for adding attendance, we need to check that only the students who are in a particular
     # course are selected for the attendance  
 

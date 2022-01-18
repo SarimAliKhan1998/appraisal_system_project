@@ -1,0 +1,12 @@
+<div>
+    <div>
+        {{class}}
+    </div>
+    <div>
+        {% for student in class.students.all %}
+          <div>
+              {{student}}
+          </div>
+        {% endfor %}
+    </div>
+</div>
