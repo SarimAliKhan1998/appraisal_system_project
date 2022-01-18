@@ -27,6 +27,7 @@
 
     
     <div>
+        <form action="" method="post">
         <div>
             Date : {{form.date}}
         </div>
@@ -52,10 +53,13 @@
           </div>
         {% endfor %}
         <div>
-            <button>
+            {% csrf_token %}
+            <input type="submit" value="Submit Attendance">
+            <!-- <button>
                 Submit Attendance
-            </button>
+            </button> -->
         </div>
+    </form>
     </div>
 
 </div>

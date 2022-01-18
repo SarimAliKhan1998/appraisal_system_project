@@ -1,4 +1,5 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic.edit import DeleteView
 from .models import Course
 from .forms import CourseModelForm
@@ -140,31 +141,80 @@ def attendance_grant_view(request, pk):
     context = {}
 
     course_class = CourseClass.objects.get(id = pk)
+    students = course_class.students.all()
+
+    student_dict = students.values()
+
+    # from datetime import datetime
+    if request.POST:
+
+        print(request.POST)
+        # print(course_class.teacher)
+        print(students)
+        attendances = request.POST.getlist('attendance_granted')
+
+        for student in students:
+            date = request.POST['date']
+            # time = datetime.now()
+
+            # current_time = time.strftime("%H:%M:%S")
+            current_time = "21:29:48"
+            
+            subject = course_class
+
+            student = student
+
+            attendance_possible = request.POST['total_attendance']
+
+            # print(request.POST['attendance_granted'])
+            # print(type(request.POST['attendance_granted']))
+            print(attendances)
+            attendance_granted = attendances[0]
+            del attendances[0]
+            # print(request.POST.getlist('attendance_granted'))
+            # attendance_granted = request.POST.getlist('attendance_granted')[0]
+            # del request.POST.getlist('attendance_granted')[0]
+            # print(request.POST.getlist('attendance_granted'))
+
+
+            Attendance.objects.create(
+                date = date,
+                # time =current_time,
+                subject = subject,
+                student = student,
+                no_of_attendances_possible = attendance_possible,
+                no_of_attendances_granted = attendance_granted
+            )
+
+
+        return redirect('teachers:teacher-detail-view', pk = (course_class.teacher.id))
 
     context['class'] = course_class
 
 
 
-    students = course_class.students.all().values()
     # print(students)
 
-    total_attendance = 0
-    for student in students:
+    for student in student_dict:
         attendance = Attendance.objects.filter(student = student['id']).filter(subject = pk)
         # if not total_attendance:
         #     total_attendance = 
         student_attendance = 0
+        total_attendance = 0
         for entry in attendance:
             # see if there's some way, we don't have to calculate total attendance for every student coz it would be same
             total_attendance += entry.no_of_attendances_possible
             student_attendance += entry.no_of_attendances_granted
 
         student['attendance'] = student_attendance
-        student['attendance_percentage'] = round((student_attendance/total_attendance)*100, 2)
+        try:
+            student['attendance_percentage'] = round((student_attendance/total_attendance)*100, 2)
+        except Exception as e:
+            student['attendance_percentage'] = 0
 
     context['total_attendance'] = total_attendance
 
-    context['student_dict'] = students
+    context['student_dict'] = student_dict
 
     context['form'] = AttendanceGrantForm(initial = {'date' : datetime.date.today()})
 
