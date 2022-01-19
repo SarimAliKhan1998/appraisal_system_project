@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from .models import User
 
@@ -16,3 +16,20 @@ class UserListView(ListView):
         return queryset
 
 
+from teacher.models import Teacher
+from student.models import Student
+
+
+def login_redirect_view(request):
+
+    if request.user.is_teacher:
+        teacher = Teacher.objects.get(user__id = request.user.id)
+        return redirect('teachers:teacher-detail-view', pk = (teacher.id))
+    elif request.user.is_student:
+        student = Student.objects.get(user__id = request.user.id)
+        return redirect('students:student-detail-view', pk = (student.id))
+    else:
+        return render(request, "landing_page.html", {})
+
+
+    # return render()
