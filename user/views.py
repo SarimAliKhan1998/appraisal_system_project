@@ -32,4 +32,3 @@ def login_redirect_view(request):
         return render(request, "landing_page.html", {})
 
 
-    # return render()

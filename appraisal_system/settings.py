@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'department',
     'course',
 
+    'django_extensions',
+
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -135,3 +137,9 @@ AUTH_USER_MODEL = 'user.User'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = "/users/redirect/"
 LOGOUT_REDIRECT_URL = "/"
+
+
+GRAPH_MODELS = {
+    'all_applications' : True,
+    'group_models' : True,
+}

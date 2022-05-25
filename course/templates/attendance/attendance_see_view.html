@@ -2,10 +2,19 @@
     <div>
         {{class}}
     </div>
+
     <div>
-        {% for student in class.students.all %}
+        No. of classes : {{total_attendance}}
+    </div>
+    <div>
+        {% for student in students %}
           <div>
-              {{student}}
+              <div>
+                {{student}}
+              </div>
+              <div>
+                  No of attendances : {{student.class_attendance}}
+              </div>
           </div>
         {% endfor %}
     </div>

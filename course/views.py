@@ -123,11 +123,20 @@ def attendance_see_view(request, pk):
     attendance_records = Attendance.objects.filter(subject = pk)
     print(attendance_records)
 
-    total_attendance = Attendance.objects.aggregate(Sum('no_of_attendances_possible'))
+    # total_attendance = Attendance.objects.aggregate(Sum('no_of_attendances_possible'))
+    total_attendance = attendance_records.aggregate(Sum('no_of_attendances_possible'))
     print(total_attendance)
 
+    context['total_attendance'] = total_attendance['no_of_attendances_possible__sum']
 
-    # print(course)
+    student_list = course_class.students.all()
+
+    for student in student_list:
+        student_attendance_records = Attendance.objects.filter(student = student.pk).filter(subject = pk)
+        student_attendance = student_attendance_records.aggregate(Sum('no_of_attendances_granted'))
+        student.class_attendance = student_attendance['no_of_attendances_granted__sum']
+
+    context['students'] = student_list
 
     return render (request,'attendance/attendance_see_view.html',context)
 

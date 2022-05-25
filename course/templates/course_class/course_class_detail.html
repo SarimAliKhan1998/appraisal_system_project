@@ -20,6 +20,13 @@
     Click <a href="{% url 'courses:course-class-update-view' class.pk %}">here</a> to update class details
 </div>
 
+<div>
+    Click <a href="{% url 'courses:attendance-see-view' class.pk %}">here</a> to check class attendance records
+</div>
+
+<div>
+    Click <a href="{% url 'courses:attendance-grant-view' class.pk %}">here</a> to add new attendance record
+</div>
 
 <div>
     Click <a href="{% url 'courses:course-class-list-view' %}">here</a> to go back
